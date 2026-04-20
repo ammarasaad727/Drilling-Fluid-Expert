@@ -4,3 +4,4 @@ plotly
 numpy
 fpdf2
 pint
+xlsxwriter
