@@ -5,3 +5,4 @@ numpy
 fpdf2
 pint
 xlsxwriter
+kaleido==0.2.1
