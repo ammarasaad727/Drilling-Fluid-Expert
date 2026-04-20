@@ -315,9 +315,10 @@ def create_pdf_report(fig, ecd_total, ecd_details, total_cost, meta):
     pdf.ln(4)
     pdf.set_font("Arial", size=11)
     # ملخص بسيط
-    pdf.multi_cell(0, 6, f"Well: {meta.get('Well','-')}  |  Unit System: {meta.get('Unit System','-')}")
-    pdf.multi_cell(0, 6, f"Target MW: {meta.get('Target MW','-')}  |  ECD: {ecd_total}")
-    pdf.multi_cell(0, 6, f"Total Estimated Cost: ${total_cost:,.2f}")
+   # إصلاح الأسطر الثلاثة باستخدام عرض محدد 190
+    pdf.multi_cell(190, 6, f"Well: {meta.get('Well','-')}  |  Unit System: {meta.get('Unit System','-')}")
+    pdf.multi_cell(190, 6, f"Target MW: {meta.get('Target MW','-')}  |  ECD: {ecd_total}")
+    pdf.multi_cell(190, 6, f"Total Estimated Cost: ${total_cost:,.2f}")
     pdf.ln(6)
     # إدراج الصورة
     tmp_img = io.BytesIO(png_buf.getvalue())
@@ -326,8 +327,8 @@ def create_pdf_report(fig, ecd_total, ecd_details, total_cost, meta):
     # تفاصيل ΔP
     pdf.ln(6)
     pdf.set_font("Arial", size=10)
-    pdf.multi_cell(0, 6, f"ECD Details: ΔP={ecd_details.get('deltaP_Pa')} Pa; ΔSG={ecd_details.get('delta_SG')}")
-    out = io.BytesIO(pdf.output(dest='S').encode('latin-1'))
+    pdf.multi_cell(190, 6, f"ECD Details: dP={ecd_details.get('deltaP_Pa')} Pa; dSG={ecd_details.get('delta_SG')}")
+    out = io.BytesIO(pdf.output())
     out.seek(0)
     return out
 
@@ -707,4 +708,3 @@ with tabs[4]:
 # Footer
 st.markdown("---")
 st.caption("Developed by Ammar Asaad | The Digital Petroleum Engineer | © 2026")
-
