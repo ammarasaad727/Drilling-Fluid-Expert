@@ -3,3 +3,4 @@ pandas
 plotly
 numpy
 fpdf2
+pint
